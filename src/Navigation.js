@@ -1,11 +1,8 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import Feed from "./screens/Feed";
 
 const Stack = createStackNavigator();
-
-const Feed = () => {
-  return null;
-};
 
 export default function Navigation() {
   return (

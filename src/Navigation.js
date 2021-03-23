@@ -9,7 +9,7 @@ const Feed = () => {
 
 export default function Navigation() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Feed" component={Feed} />
     </Stack.Navigator>
   );

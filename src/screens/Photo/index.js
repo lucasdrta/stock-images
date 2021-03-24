@@ -1,6 +1,5 @@
 import React from "react";
-import { View, Image, Dimensions } from "react-native";
-import ImageZoom from "react-native-image-pan-zoom";
+import { View } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 import styles from "./styles";

@@ -1,11 +1,13 @@
 import React from "react";
 import { View, FlatList, Image, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
 import Header from "../../components/Header";
 import Categories from "../../components/Categories";
 
 export default function Feed() {
+  const navigation = useNavigation();
   const data = [
     {
       id: 1,
@@ -69,6 +71,9 @@ export default function Feed() {
     },
   ];
 
+  function navigateToPhoto(data) {
+    navigation.navigate("Photo", { data });
+  }
   return (
     <>
       <Header />
@@ -83,7 +88,10 @@ export default function Feed() {
             justifyContent: "center",
           }}
           renderItem={({ item: data }) => (
-            <TouchableOpacity style={styles.photoButton}>
+            <TouchableOpacity
+              style={styles.photoButton}
+              onPress={() => navigateToPhoto(data)}
+            >
               <Image source={{ uri: data.photo }} style={styles.photo} />
             </TouchableOpacity>
           )}

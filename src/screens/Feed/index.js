@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, FlatList, Image } from "react-native";
+import { View, FlatList, Image, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
 import Header from "../../components/Header";
@@ -78,11 +78,14 @@ export default function Feed() {
           data={data}
           keyExtractor={(item) => item.id}
           numColumns={2}
+          contentContainerStyle={{
+            alignItems: "center",
+            justifyContent: "center",
+          }}
           renderItem={({ item: data }) => (
-            <Image
-              source={{ uri: data.photo }}
-              style={{ height: 200, width: "50%", resizeMode: "cover" }}
-            />
+            <TouchableOpacity style={styles.photoButton}>
+              <Image source={{ uri: data.photo }} style={styles.photo} />
+            </TouchableOpacity>
           )}
         />
       </View>

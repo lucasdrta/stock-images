@@ -5,14 +5,12 @@ export default StyleSheet.create({
     backgroundColor: "#fff",
     flex: 1,
   },
+  photoButton: {
+    width: "50%",
+  },
   photo: {
     height: 200,
-    backgroundColor: "#000",
-    borderRadius: 30,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#40494E",
-    flexGrow: 1,
-    margin: 4,
+    width: "100%",
+    resizeMode: "cover",
   },
 });

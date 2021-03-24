@@ -1,11 +1,12 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Image, Dimensions } from "react-native";
+import ImageZoom from "react-native-image-pan-zoom";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { MaterialIcons, Feather } from "@expo/vector-icons";
 
 import styles from "./styles";
 import Header from "../../components/Photo/Header";
 import Footer from "../../components/Photo/Footer";
+import PinchableBox from "../../components/PinchableBox";
 
 export default function Photo() {
   const navigation = useNavigation();
@@ -17,7 +18,8 @@ export default function Photo() {
       <Header />
 
       <View style={styles.imageContainer}>
-        <Image source={{ uri: data.photo }} style={styles.image} />
+        <PinchableBox imageUri={data.photo} />
+        {/* <Image source={{ uri: data.photo }} style={styles.image} /> */}
       </View>
 
       <Footer />

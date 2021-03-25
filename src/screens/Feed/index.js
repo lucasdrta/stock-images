@@ -1,26 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { View, FlatList, Image, TouchableOpacity } from "react-native";
+import React, { useContext } from "react";
+import {
+  View,
+  FlatList,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { ImageContext } from "../../contexts/ImageContext";
 
 import styles from "./styles";
 import Header from "../../components/Header";
+import LazyImage from "../../components/LazyImage";
 import Categories from "../../components/Categories";
 
 export default function Feed() {
-  const [data, setData] = useState([]);
+  const { data, loadApiData, loading, refreshiList, refreshing } = useContext(
+    ImageContext
+  );
   const navigation = useNavigation();
 
   function navigateToPhoto(data) {
     navigation.navigate("Photo", { data });
   }
 
-  useEffect(() => {
-    fetch(
-      "https://api.unsplash.com/photos/?client_id=7wQgLl4lMGkFavxqwAWHoGj2CQmlWY8JoCyhBadnxlc"
-    )
-      .then((response) => response.json())
-      .then((data) => setData(data));
-  }, []);
   return (
     <>
       <Header />
@@ -30,6 +32,13 @@ export default function Feed() {
           data={data}
           keyExtractor={(item) => item.id}
           numColumns={2}
+          onEndReached={async () => await loadApiData()}
+          onEndReachedThreshold={0.1}
+          onRefresh={refreshiList}
+          refreshing={refreshing}
+          ListFooterComponent={
+            loading && <ActivityIndicator size="small" color="#999" />
+          }
           contentContainerStyle={{
             alignItems: "center",
             justifyContent: "center",
@@ -39,7 +48,11 @@ export default function Feed() {
               style={styles.photoButton}
               onPress={() => navigateToPhoto(data)}
             >
-              <Image source={{ uri: data.urls.thumb }} style={styles.photo} />
+              <LazyImage
+                source={data.urls.regular}
+                small={data.urls.thumb}
+                style={{ width: "100%", height: 200 }}
+              />
             </TouchableOpacity>
           )}
         />

@@ -5,7 +5,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import styles from "./styles";
 import Header from "../../components/Photo/Header";
 import Footer from "../../components/Photo/Footer";
-import PinchableBox from "../../components/PinchableBox";
+import LazyImage from "../../components/LazyImage";
 
 export default function Photo() {
   const navigation = useNavigation();
@@ -17,7 +17,15 @@ export default function Photo() {
       <Header />
 
       <View style={styles.imageContainer}>
-        <PinchableBox imageUri={data.urls.full} />
+        <LazyImage
+          small={data.urls.thumb}
+          source={data.urls.regular}
+          style={{
+            height: "100%",
+            width: "100%",
+            borderRadius: 20,
+          }}
+        />
       </View>
 
       <Footer id={data.id} />

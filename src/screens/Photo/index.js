@@ -17,11 +17,10 @@ export default function Photo() {
       <Header />
 
       <View style={styles.imageContainer}>
-        <PinchableBox imageUri={data.photo} />
-        {/* <Image source={{ uri: data.photo }} style={styles.image} /> */}
+        <PinchableBox imageUri={data.urls.full} />
       </View>
 
-      <Footer />
+      <Footer id={data.id} />
     </View>
   );
 }

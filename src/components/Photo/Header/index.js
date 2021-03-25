@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Alert, View, Text, TouchableOpacity } from "react-native";
 import { MaterialIcons, Feather, FontAwesome } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
 
 export default function Header() {
   const [hasLiked, setHasLiked] = useState(false);
+  const navigation = useNavigation();
 
   function likePhoto() {
     setHasLiked(!hasLiked);

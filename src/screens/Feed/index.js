@@ -33,7 +33,7 @@ export default function Feed() {
           keyExtractor={(item) => item.id}
           numColumns={2}
           onEndReached={async () => await loadApiData()}
-          onEndReachedThreshold={0.1}
+          onEndReachedThreshold={0.3}
           onRefresh={refreshiList}
           refreshing={refreshing}
           ListFooterComponent={

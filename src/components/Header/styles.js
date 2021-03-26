@@ -7,7 +7,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: Constants.statusBarHeight + 30,
+    paddingTop: Constants.statusBarHeight + 20,
     paddingBottom: 20,
     backgroundColor: "#ffffff",
   },
@@ -19,7 +19,7 @@ export default StyleSheet.create({
     position: "absolute",
     top: Constants.statusBarHeight,
     right: 0,
-    paddingVertical: 30,
+    paddingVertical: 20,
     paddingHorizontal: 20,
   },
 });

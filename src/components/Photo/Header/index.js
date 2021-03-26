@@ -20,7 +20,7 @@ export default function Header() {
       </TouchableOpacity>
       <TouchableOpacity style={styles.likeButton} onPress={() => likePhoto()}>
         {hasLiked === true ? (
-          <FontAwesome name="heart" size={20} color="#DE6549" />
+          <FontAwesome name="heart" size={20.5} color="#DE6549" />
         ) : (
           <Feather name="heart" size={20} color="#40494E" />
         )}

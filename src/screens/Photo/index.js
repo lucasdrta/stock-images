@@ -23,12 +23,12 @@ export default function Photo() {
           style={{
             height: "100%",
             width: "100%",
-            borderRadius: 20,
           }}
+          borderRadius={10}
         />
       </View>
 
-      <Footer id={data.id} />
+      <Footer data={data} />
     </View>
   );
 }

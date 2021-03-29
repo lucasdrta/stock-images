@@ -4,18 +4,28 @@ export const ImageContext = createContext({});
 
 export function ImageProvider({ children }) {
   const [data, setData] = useState([]);
+  const [topicData, setTopicData] = useState([]);
+  const [topicPage, setTopicPage] = useState(1);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [topics, setTopics] = useState([]);
+  const [tabName, setTabName] = useState("Editorial");
+  const [topicId, setTopicId] = useState("");
 
-  async function loadTopicPhotos(topic, shouldRefresh = false) {
-    setData([]);
+  async function loadTopicPhotos(
+    topic,
+    pageNumber = topicPage,
+    shouldRefresh = false
+  ) {
     fetch(
-      `https://api.unsplash.com/topics/${topic}/photos?client_id=7wQgLl4lMGkFavxqwAWHoGj2CQmlWY8JoCyhBadnxlc&per_page=20`
+      `https://api.unsplash.com/topics/${topic}/photos?client_id=7wQgLl4lMGkFavxqwAWHoGj2CQmlWY8JoCyhBadnxlc&page=${pageNumber}&per_page=20`
     )
       .then((response) => response.json())
-      .then((topicData) => setData(topicData));
+      .then((apiData) => {
+        setTopicData(shouldRefresh ? apiData : [...topicData, ...apiData]);
+        setTopicPage(topicPage + 1);
+      });
   }
 
   async function loadTopicsName() {
@@ -41,7 +51,12 @@ export function ImageProvider({ children }) {
 
   async function refreshiList() {
     setRefreshing(true);
-    await loadApiData(1, true);
+
+    if (tabName !== "Editorial") {
+      await loadTopicPhotos(topicId, 1, true);
+    } else {
+      await loadApiData(1, true);
+    }
 
     setRefreshing(false);
   }
@@ -60,6 +75,11 @@ export function ImageProvider({ children }) {
         refreshing,
         topics,
         loadTopicPhotos,
+        tabName,
+        setTabName,
+        topicData,
+        setTopicId,
+        topicId,
       }}
     >
       {children}

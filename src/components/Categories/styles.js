@@ -14,9 +14,21 @@ export default StyleSheet.create({
     borderColor: "#40494E",
     marginHorizontal: 10,
   },
+  categoryItemActive: {
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 20,
+    borderWidth: 1,
+    backgroundColor: "#40494E",
+    borderColor: "#40494E",
+    marginHorizontal: 10,
+  },
   categoryItemText: {
-    color: "#fff",
     fontSize: 14,
     color: "#40494E",
+  },
+  categoryItemTextActive: {
+    fontSize: 14,
+    color: "#fff",
   },
 });

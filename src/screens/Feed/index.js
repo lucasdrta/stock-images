@@ -14,9 +14,17 @@ import LazyImage from "../../components/LazyImage";
 import Categories from "../../components/Categories";
 
 export default function Feed() {
-  const { data, loadApiData, loading, refreshiList, refreshing } = useContext(
-    ImageContext
-  );
+  const {
+    data,
+    topicData,
+    loadApiData,
+    loading,
+    refreshiList,
+    refreshing,
+    tabName,
+    loadTopicPhotos,
+    topicId,
+  } = useContext(ImageContext);
   const navigation = useNavigation();
 
   function navigateToPhoto(data) {
@@ -29,10 +37,14 @@ export default function Feed() {
       <View style={styles.container}>
         <Categories />
         <FlatList
-          data={data}
+          data={tabName !== "Editorial" ? topicData : data}
           keyExtractor={(item) => item.id}
           numColumns={2}
-          onEndReached={async () => await loadApiData()}
+          onEndReached={async () => {
+            tabName !== "Editorial"
+              ? await loadTopicPhotos(topicId)
+              : await loadApiData();
+          }}
           onEndReachedThreshold={0.3}
           onRefresh={refreshiList}
           refreshing={refreshing}

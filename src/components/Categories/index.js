@@ -4,8 +4,14 @@ import { ImageContext } from "../../contexts/ImageContext";
 
 import styles from "./styles";
 export default function Categories() {
-  const { topics, loadTopicPhotos, loadApiData } = useContext(ImageContext);
-  const [tabName, setTabName] = useState("Editorial");
+  const {
+    topics,
+    loadTopicPhotos,
+    loadApiData,
+    tabName,
+    setTabName,
+    setTopicId,
+  } = useContext(ImageContext);
 
   return (
     <ImageContext.Provider>
@@ -17,7 +23,6 @@ export default function Categories() {
           contentContainerStyle={styles.categoryContainerStyle}
         >
           <TouchableOpacity
-            name="Editorial"
             style={
               tabName === "Editorial"
                 ? styles.categoryItemActive
@@ -46,9 +51,10 @@ export default function Categories() {
                   ? styles.categoryItemActive
                   : styles.categoryItem
               }
-              onPress={() => {
+              onPress={async () => {
                 setTabName(topic.title);
-                loadTopicPhotos(topic.id);
+                setTopicId(topic.id);
+                await loadTopicPhotos(topic.id, 1, true);
               }}
             >
               <Text
